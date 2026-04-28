@@ -19,14 +19,15 @@ language: en
 issued: 2024-08-22
 audience: scientists
 publisher: NOAA Atlantic Oceanographic and Meteorological Laboratory
-hasVersion: 1
+hasVersion: 1.2.0
 license: CC0 1.0 Universal
 maturity level: mature
 
 # FAIRe terms
 pcr_0_1: 1
+inhibition_check_0_1: 0
+inhibition_check: not applicable
 thermocycler: Eppendorf Mastercycler Nexus Thermal Cycler
-amplificationReactionVolume: 13
 assay_name: Fish-12S-MiFish-U-Miya-Sales
 assay_validation: not provided
 targetTaxonomicAssay: Actinopterygii
@@ -40,23 +41,27 @@ pcr_primer_name_forward: MiFish-U-F-V2
 pcr_primer_name_reverse: MiFish-U-R
 pcr_primer_reference_forward: http://dx.doi.org/10.1098/rsos.150088
 pcr_primer_reference_reverse: http://dx.doi.org/10.1098/rsos.150088
-pcr_primer_vol_forward: 1.0
-pcr_primer_vol_reverse: 1.0
+pcr_primer_vol_forward: 0.5
+pcr_primer_vol_reverse: 0.5
 pcr_primer_conc_forward: 10
 pcr_primer_conc_reverse: 10
+pcr_dna_vol: 1.0
+amplificationReactionVolume: 12.5
 probeReporter: not applicable
 probeQuencher: not applicable
 probe_seq: not applicable
 probe_ref: not applicable
 probe_conc: not applicable
 commercial_mm: AmpliTaq Gold 360 Master Mix
-custom_mm: PCR reactions were run in 13 µL reaction volumes, with 1.0 µL of DNA, 6.25 µL of AmpliTaq Gold, 2.71 µL of water, 1.04 µL BSA (0.08 mg/mL), and 1.0 µL of each primer (10 µM).
-pcr_dna_vol: 1.0
-pcr_rep: 1.0
+custom_mm: PCR reactions were run in 12.5 µL reaction volumes, with 1.0 µL of DNA, 6.25 µL of AmpliTaq Gold, 4.25 µL of water, and 0.5 µL of each primer (10 µM).
+block_seq: not applicable
+block_ref: not applicable
+block_taxa: not applicable
+pcr_rep: 3.0
 nucl_acid_amp: https://www.protocols.io/view/environmental-dna-edna-12s-metabarcoding-illumina-kqdg35kqzv25/v
 pcr_cond: initial denaturation:95_15;touchdown cycling;denaturation:94_0.5;annealing:69.5_0.5;elongation:72_1.5;13;normal cycling;denaturation:94_0.5;annealing:50_0.5;elongation:72_0.75;final elongation:72_10;25
 annealingTemp: 69.5;50
-pcr_cycles: 13;35
+pcr_cycles: 13;25
 pcr_analysis_software: not provided
 pcr_method_additional: not provided
 barcoding_pcr_appr: two-step PCR
@@ -127,7 +132,7 @@ pcr2_method_additional: not applicable
 | 1.1.0 | 2024-11-16 | Addition of FAIR eDNA terms in YAML front matter |
 | 1.1.1 | 2024-12-15 | Updated YAML front matter |
 | 1.1.2 | 2026-03-30 | Updated assay name |
-| 1.2.0 | 2026-03-30 | PCR reaction details updated to match G-FISHER protocol |
+| 1.2.0 | 2026-04-28 | Updated protocol to match 12S MBARI protocol |
 
 ### Acronyms and Abbreviations
 
@@ -153,7 +158,7 @@ pcr2_method_additional: not applicable
 
 ### Summary
 
-This protocol describes steps for performing PCR for [12S rRNA](target_gene) [V5-V6](target_subfragment) marker gene regions using eDNA extracted from Sterivex at NOAA's AOML. The PCR protocol only includes a primary PCR step as the secondary PCR, library preparation and sequencing is completed by Michigan State University's RTSF Genomics Core. Steps related to preparing samples for sequencing and the Genomics Core's procedure are included. Some steps (e.g. PCR plate preparation) have been or can be optimized for use with the Opentrons OT2 robot. This protocol closely follows along with the following protocol: <https://www.protocols.io/view/environmental-dna-edna-12s-metabarcoding-illumina-kqdg35kqzv25/v2>.
+This protocol describes steps for performing PCR for [12S rRNA](target_gene) [V5-V6](target_subfragment) marker gene regions using eDNA extracted from Sterivex at NOAA's AOML. The PCR protocol only includes a primary PCR step as the secondary PCR, library preparation and sequencing is completed by Michigan State University's RTSF Genomics Core. Steps related to preparing samples for sequencing and the Genomics Core's procedure are included. Some steps (e.g. PCR plate preparation) have been or can be optimized for use with the Opentrons OT2 robot. This protocol closely follows along with the following protocol from MBARI: <https://www.protocols.io/view/environmental-dna-edna-12s-metabarcoding-illumina-kqdg35kqzv25/v2>.
 
 ### Method description and rationale
 
@@ -248,17 +253,16 @@ For 96-well Plate:
 1. Make PCR master mix and add 12 µL to each well of PCR plate - possible use on Opentrons OT2 Pipetting Robot. Account for triplicate reactions.
 
 - 6.25 µL [AmpliTaq Gold 360 Master Mix](commercial_mm)
-- 2.71 µL molecular water
-- 1.04 µL BSA (0.08 mg/mL; 0.0064 mg/mL final)
-- 1 µL Fwd primer (10 μM; 0.77 μM final) - [12S MiFish_U F Fluidigm V2](pcr_primer_name_forward)
-- 1 µL Rev primer (10 μM; 0.77 μM final) - [12S MiFish_U R Fluidigm](pcr_primer_name_reverse)
+- 4.25 µL molecular water
+- 0.5 µL Fwd primer (10 μM; 0.4 μM final) - [12S MiFish_U F Fluidigm V2](pcr_primer_name_forward)
+- 0.5 µL Rev primer (10 μM; 0.4 μM final) - [12S MiFish_U R Fluidigm](pcr_primer_name_reverse)
 
 | PCR Primer Name | Direction | Sequence (5’ -> 3’) | Sequence (5’ -> 3’) with Fluidigm Adapters | Fluidigm Adapter |
 | ----- | ----- | ----- |----|----|
 | 12S MiFish F V2 | forward | [GCCGGTAAAACTCGTGCCAGC](pcr_primer_forward) | ACACTGACGACATGGTTCTACA xxx [GCCGGTAAAACTCGTGCCAGC](pcr_primer_forward) | CS1-TS-F |
 | 12S MiFish R | reverse | [CATAGTGGGGTATCTAATCCCAGTTTG](pcr_primer_reverse) | TACGGTAGCAGAGACTTGGTCT xxx [CATAGTGGGGTATCTAATCCCAGTTTG](pcr_primer_reverse) | CS2-TS-R |
 
-2. Add 1 µL of sample DNA (or molecular water for NTC) to respective triplicate wells for a total reaction volume of [13](amplificationReactionVolume) µL per well. Pipette up and down or vortex to fully distribute DNA into master mix.
+2. Add 1 µL of sample DNA (or molecular water for NTC) to respective triplicate wells for a total reaction volume of [12.5](amplificationReactionVolume) µL per well. Pipette up and down or vortex to fully distribute DNA into master mix.
 3. Seal plate with PCR plate seal or strip caps.
 4. Load plate onto thermal cycler and select "MBARI 12S Touchdown" program to run the following steps:
 
